@@ -1,0 +1,8 @@
+*.env
+/future_ideas
+/images/logo.jpg
+.idea
+.venv
+*.toml
+.DS_Store
+__pycache__
