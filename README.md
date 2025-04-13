@@ -27,6 +27,8 @@ This software is open source under a permissive [License](LICENSE), and it's FRE
 
 **Console** only or beautiful **PlotlyDash** GUI.
 
+There is a premium version of this software available via Telegram **[link](t.me/premium_autotrader_bot)**
+
 ## Features
 
 * Optional **GUI** powered by plotly/dash**
