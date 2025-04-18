@@ -31,7 +31,7 @@ There is a premium version of this software available via Telegram **[link](t.me
 
 ## Features
 
-* Optional **GUI** powered by plotly/dash**
+* **GUI** powered by Plotly/Dash** OR console mode
 
 * Test mode to only test the prediction API – no trades would be made (suitable for LLM APIs; Pandas – not so much)
 
@@ -238,7 +238,7 @@ Monero is also the default crypto for this **Crypto Autotrader** to spot-trade.
 If you wish to use any other cryptocurrency, use this external provider link (no KYC):
 
 <a href="https://nowpayments.io/donation/cryptoautotrader" target="_blank" rel="noreferrer noopener">
-    <img src="https://nowpayments.io/images/embeds/donation-button-white.svg" alt="Cryptocurrency & Bitcoin donation button by NOWPayments" width="300">
+    <img src="https://nowpayments.io/images/embeds/donation-button-white.svg" alt="Cryptocurrency & Bitcoin donation button by NOWPayments" width="200">
 </a>
 
 ## Support
