@@ -290,6 +290,7 @@ See my relevant affiliate links:
 
 * [Rent a VPS/VDS worldwide, pay in crypto!](https://my.bluevps.com/aff.php?aff=684)
 * [Crypto processing services for persons and businesses](https://account.nowpayments.io/create-account?link_id=3477503345)
+* [Get 10% Cashback Rate on commissions on Kucoin](https://www.kucoin.com/r/rf/CX87WUV4) (or use referral code `CX87WUV4`)
 
 ## Screenshots
 
