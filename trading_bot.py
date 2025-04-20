@@ -105,8 +105,11 @@ class TradingBot:
         # Set the symbol you want to trade on KuCoin
         self.symbol: str = getenv("TRADING_PAIR")
         pair_lst: list = self.symbol.split("/")
-        self.base_asset: str = pair_lst[0]
-        self.quote_asset: str = pair_lst[1]
+        self.base_asset: str = pair_lst[0] if pair_lst[0] != self.symbol else getenv("TRADING_BASE")
+        if pair_lst[0] == self.symbol:
+            self.quote_asset: str = getenv("TRADING_QUOTE")
+        else:
+            self.quote_asset: str = pair_lst[1]
 
         self.predict_up_or_down: Callable[[Any], str] = prediction_api
 
