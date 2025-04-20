@@ -6,8 +6,6 @@
 
 *See [LICENSE](LICENSE) for more clarification. And do read this README carefully.*
 
-***At this point any feedback is really appreciated – do get in touch with me in a way you see fit.***
-
 # Crypto Autotrader
 
 <img src="images/logo-modified.png" width=100 /> © Stan
@@ -18,20 +16,18 @@
 This software is capable of fully autonomous trading on popular cryptocurrency exchanges, once set up correctly.
 
 Currently, it utilizes several naive approaches to spot trading (either [price-related crossovers](https://trendspider.com/learning-center/moving-average-crossover-strategies/) or
-GPT-powered analytics is an option); however, due to it being highly customizable, one could squeeze better results out
+LLM-powered analytics is an option); however, due to it being highly customizable, one could squeeze better results out
 of it.
 
 This software is open source under a permissive [License](LICENSE), and it's FREE.
 
-*Support for older Python versions is not guaranteed, but deemed probable for 3.10 and newer.*
-
-**Console** only or beautiful **PlotlyDash** GUI.
-
 There is a premium version of this software available via Telegram **[link](t.me/premium_autotrader_bot)**
+
+*Support for older Python versions is not guaranteed, but deemed probable for 3.10 and newer.*
 
 ## Features
 
-* **GUI** powered by Plotly/Dash** OR console mode
+* **Console** only or beautiful **PlotlyDash** GUI.
 
 * Test mode to only test the prediction API – no trades would be made (suitable for LLM APIs; Pandas – not so much)
 
@@ -62,7 +58,7 @@ programmed logic is in two separate files for predictive and running modules, bu
 All fields must be filled with valid strings. Fields that end with '_JSON' must be filled with valid json data strings.
 `.env` files must be linked in the starting sequence (e.g., via command line arguments or as Default strings in the code).
 
-### Running module variables
+### Main variables
 
 *It is easier to create a new `main.env` as per [example](main.env.example), that has included explanations for each
 variable, as well*
@@ -102,7 +98,7 @@ their portfolio, before an order can be placed (If that isn't the case, the scri
 
 `TRADING_BASE`, `TRADING_QUOTE` – if a trading pair doesn't have a `/` sign, these are necessary (i.e., if `TRADING_PAIR=XMRUSDT`, then `TRADING_BASE=XMR` and `TRADING_QUOTE=USDT` MUST be supplied)
 
-### Predictive module variables
+### Predictions related variables
 
 *(easier to create a new `llm.env` or `probability.env`, or `pandas.env` as per [example 1](llm.env.example) or 
 [example 2](probability_llm.env.example), or [example 3](pandas.env.example))*
@@ -133,9 +129,9 @@ If `DEFAULT_PREDICTION_API=LLM`, then:
 
 Also, if `DEFAULT_PREDICTION_API=PROBABILITY_LLM`, then additional:
 
-`LOWER_PROB` – Sell signal, if lower than (default 20)
+`LOWER_PROB` – Sell signal, if lower than (valid number or default 20)
 
-`UPPER_PROB` – Buy signal, if higher than (default 80).
+`UPPER_PROB` – Buy signal, if higher than (valid number or default 80).
 
 ## Deployment
 
