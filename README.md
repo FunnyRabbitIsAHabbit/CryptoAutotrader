@@ -38,9 +38,9 @@ See [YOUTUBE TUTORIAL](https://www.youtube.com/watch?v=CwRKjXicPpY).
 * This script endlessly places buy and sell orders based on predictive modeling (with calculations of price and
   amount, see function `prepare_order` of class `TradingBot` in module [trading_bot.py](trading_bot.py)):
 
-  a. Price for 'BUY' orders is `((bid + ask) / 2) * (1 - parametrized premium)`,
+  a. Price for 'BUY' orders is `((bid + ask) / 2) x (1 - parametrized premium)`,
 
-  b. Price for 'SELL' orders is `((bid + ask) / 2) * (1 + parametrized premium)`,
+  b. Price for 'SELL' orders is `((bid + ask) / 2) x (1 + parametrized premium)`,
 
   c. Amount to buy is `parametrized reinvestment_rate x free quote token balance / price buy`
 
