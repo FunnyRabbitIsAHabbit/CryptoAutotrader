@@ -1,4 +1,4 @@
-ccxt==4.4.77
+ccxt==4.4.79
 pandas~=2.2.3
 python-dotenv~=1.0.1
 stockstats~=0.6.4
