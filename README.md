@@ -220,7 +220,7 @@ Untested! The [Dockerfile](Dockerfile) is shipped with essential commands.
 
 ## 🚀 About Me
 
-I'm a Full Stack Software Engineer, specializing in all things Python. I code a lot, I don't publish my code a lot. I
+I'm a Software Engineer, specializing in all things Python. I code a lot, I don't publish my code a lot. I
 also happen to be a domain expert in Business, Economics & Finance, holding both M.Sc. & B.Sc. degrees in relevant
 fields of study.
 
