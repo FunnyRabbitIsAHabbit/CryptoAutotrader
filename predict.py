@@ -52,8 +52,8 @@ class PredictionApp:
 
             case "PROBABILITY_LLM":
                 self.pre_prompt: str = GeneralParameters.LLM_PROBABILITY_PROMPT
-                self.lower_prob: float = float(getenv("LOWER_PROB", -1))
-                self.upper_prob: float = float(getenv("UPPER_PROB", -1))
+                self.lower_prob: float = float(getenv("LOWER_PROB", -1.0))
+                self.upper_prob: float = float(getenv("UPPER_PROB", -1.0))
                 if not 0.0 <= self.lower_prob <= self.upper_prob <= 100.0:
                     self.lower_prob = GeneralParameters.DEFAULT_LOWER_PROB
                     self.upper_prob = GeneralParameters.DEFAULT_UPPER_PROB
