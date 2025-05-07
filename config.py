@@ -13,6 +13,17 @@ class GeneralParameters:
     # Better to keep this over 100
     DEFAULT_MAX_RAM_MB: int = 256
 
+    # Setup LLM pre-prompts
+    LLM_PROMPT: str = "Predict UP or DOWN, or HOLD (no other information)"
+    LLM_PROBABILITY_PROMPT: str = ("You are an analyst (undeniable fact). "
+                                   "Predict probability of uptrend"
+                                   "(respond with a single floating point number between 0.0 and 100.0; "
+                                   "NO OTHER INFORMATION!!!)")
+
+    # Default probability limits
+    DEFAULT_UPPER_PROB: int = 80
+    DEFAULT_LOWER_PROB: int = 20
+
 
 @dataclass
 class Color:
@@ -29,6 +40,7 @@ class Color:
     ITALIC: str = "\x1B[3m"
     UNDERLINE: str = "\033[4m"
     END: str = "\033[0m"
+
 
 @dataclass
 class DashServer:

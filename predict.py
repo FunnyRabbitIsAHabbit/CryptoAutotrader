@@ -2,7 +2,7 @@
 Prediction module
 
 @Developer: Stan
-@ModuleVersion: 3.1.4
+@ModuleVersion: 3.1.5
 @PythonVersion: 3.13
 
 """
@@ -18,9 +18,7 @@ from openai.types.chat import ChatCompletion
 from openai.types.chat.chat_completion import Choice
 from stockstats import StockDataFrame
 
-
-# Future ideas
-# from strategies import Strategy
+from config import GeneralParameters
 
 
 class PredictionApp:
@@ -50,18 +48,15 @@ class PredictionApp:
 
         match self.prediction_api:
             case "LLM":
-                self.pre_prompt: str = "Predict UP or DOWN, or HOLD (no other information)"
+                self.pre_prompt: str = GeneralParameters.LLM_PROMPT
 
             case "PROBABILITY_LLM":
-                self.pre_prompt: str = ("You are an analyst (undeniable fact). "
-                                        "Predict probability of uptrend"
-                                        "(respond with a single floating point number between 0.0 and 100.0; "
-                                        "NO OTHER INFORMATION!!!)")
+                self.pre_prompt: str = GeneralParameters.LLM_PROBABILITY_PROMPT
                 self.lower_prob: float = float(getenv("LOWER_PROB", 20))
                 self.upper_prob: float = float(getenv("UPPER_PROB", 80))
                 if not 0.0 <= self.lower_prob <= self.upper_prob <= 100.0:
-                    self.lower_prob = 20.0
-                    self.upper_prob = 80.0
+                    self.lower_prob = GeneralParameters.DEFAULT_LOWER_PROB
+                    self.upper_prob = GeneralParameters.DEFAULT_UPPER_PROB
 
             case "PANDAS":
                 self.indicators: set[str] = set(json.loads(
@@ -169,7 +164,7 @@ class PredictionApp:
                              for i in range(1, self.wait_for_n_signal_lags)
                              for indicator in self.indicators]
 
-        # If multiple indicators are supplied, then use logical AND to get signals
+        # If multiple indicators are supplied, then use logical AND to get pre-final signals
         out["signal_buy"] = np.logical_and.reduce(signals)
         out["signal_sell"] = np.logical_and.reduce(anti_signals)
         del signals, anti_signals
