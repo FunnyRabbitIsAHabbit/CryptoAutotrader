@@ -256,12 +256,12 @@ class PredictionApp:
             if len(x := content.split()):
                 content = x[0]
             try:
-                f = float(content)
-                print(f"\t[AI]\tProbability of uptrend: {f}%")
-                if 0.0 <= f <= self.lower_prob:
+                probability_result = float(content)
+                print(f"\t[AI]\tProbability of uptrend: {probability_result}%")
+                if 0.0 <= probability_result <= self.lower_prob:
                     return "down"
 
-                if self.upper_prob <= f <= 100.0:
+                if self.upper_prob <= probability_result <= 100.0:
                     return "up"
             except ValueError as error:
                 print(f"\t[WARN]\t Prediction AI can't supply needed data format: {error}")
