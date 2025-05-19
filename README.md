@@ -21,7 +21,7 @@ of it.
 
 This software is open source under a permissive [License](LICENSE), and it's FREE.
 
-There is a premium version of this software available via Telegram **[link](t.me/premium_autotrader_bot)**
+There is a premium version of this software available via Telegram **[link](https://t.me/premium_autotrader_bot)**
 
 See [YOUTUBE TUTORIAL](https://www.youtube.com/watch?v=CwRKjXicPpY).
 
