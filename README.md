@@ -21,11 +21,11 @@ of it.
 
 This software is open source under a permissive [License](LICENSE), and it's FREE.
 
-There is a premium version of this software available via Telegram **[link](https://t.me/premium_autotrader_bot)**
+There is a premium version of this software available via this Telegram **[link](https://t.me/premium_autotrader_bot)**.
 
-See [YOUTUBE TUTORIAL](https://www.youtube.com/watch?v=CwRKjXicPpY).
+See [YOUTUBE TUTORIAL](https://www.youtube.com/watch?v=CwRKjXicPpY), where we go over the setup process and look into more details.
 
-*Support for older Python versions is not guaranteed, but deemed probable for 3.10 and newer.*
+*This is a Python 3.13 native project. Support for older Python versions is not guaranteed, but deemed probable for 3.10 and newer (perhaps, after some dependencies downgrades).*
 
 ## Features
 
