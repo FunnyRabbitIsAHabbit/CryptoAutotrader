@@ -235,7 +235,7 @@ Monero is also the default crypto for this **Crypto Autotrader** to spot-trade.
 
 If you wish to use any other cryptocurrency, use this external provider link (no KYC):
 
-<a href="https://nowpayments.io/donation/cryptoautotrader" target="_blank" rel="noreferrer noopener">
+<a href="https://nowpayments.io/donation/cryptoautotrader5" target="_blank" rel="noreferrer noopener">
     <img src="https://nowpayments.io/images/embeds/donation-button-white.svg" alt="Cryptocurrency & Bitcoin donation button by NOWPayments" width="200">
 </a>
 
