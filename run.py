@@ -2,7 +2,7 @@
 Main bot module
 
 @Developer: Stan
-@AppVersion: 3.3.1
+@AppVersion: 3.3.2
 @PythonVersion: 3.13
 
 """
@@ -10,15 +10,13 @@ Main bot module
 # Python default library ---------
 import argparse
 import sys
-from os import PathLike
 from os.path import abspath, dirname, join
 from typing import Any, Callable
 # --------------------------------
 
 # Own modules --------------------
-import dashboard
 from config import TestData
-from integrate_dashboard import OutputIntegration
+from output_integration import OutputIntegration
 from predict import PredictionApp
 from trading_bot import TradingBot
 # --------------------------------
@@ -64,19 +62,19 @@ def global_main() -> None:
         type=str,
         required=False,
     )
-    # New argument for dashboard mode:
+    # New argument for base-output mode:
     parser_run.add_argument(
-        "-d", "--dashboard",
+        "-b", "--base",
         action="store_true",
-        help="Launch the app in dashboard mode (powered by Streamlit)"
+        help="Launch the app in base output mode (NOT IMPLEMENTED)"
     )
 
     console = console_arguments_parser.parse_args()
     mode = console.running_mode
 
     # Paths
-    current_path: str | PathLike = dirname(abspath(__file__))
-    predictions_env_path: str | PathLike = join(current_path, console.predictions)
+    current_path: str = dirname(abspath(__file__))
+    predictions_env_path: str  = join(current_path, console.predictions)
 
     # Predictions
     prediction_app: PredictionApp = PredictionApp(env_file_path=predictions_env_path)
@@ -86,17 +84,16 @@ def global_main() -> None:
         case "run":
             main_trading_env_path = join(current_path, console.env)
 
-            # If -d or --dashboard flags have been used to run the script
-            if console.dashboard:
-                print("[START]\tRunning in `run` mode with dashboard & trading logic concurrently.")
+            # If -b or --base flags have been used to run the script
+            if console.base:
+                print("[START]\tRunning in `run` mode with base output logic.")
                 trading_bot: TradingBot = TradingBot(
                     prediction_api=prediction_function,
-                    output_integration=OutputIntegration("dashboard"),
+                    output_integration=OutputIntegration("base"),
                     env_file_path = main_trading_env_path
                 )
-                dashboard.run_dashboard()
 
-            # No -d or --dashboard flag has been given
+            # No -b or --base flag has been given
             else:
                 print("[START]\tStarted module in `run` mode without dashboard.")
                 trading_bot: TradingBot = TradingBot(
