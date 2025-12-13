@@ -2,7 +2,7 @@
 Prediction module
 
 @Developer: Stan
-@ModuleVersion: 3.1.5
+@ModuleVersion: 3.1.6
 @PythonVersion: 3.13
 
 """
@@ -69,15 +69,6 @@ class PredictionApp:
 
             case _:
                 print(f"\t[INFO]\tAI backend NOT SUPPORTED.")
-
-            # Currently, this level of abstraction isn't supported
-            # self.strategy_transformer: Strategy = Strategy(self.indicators)
-            # check: Union[bool, Optional[tuple]] = self.strategy_transformer.run_check()
-            # if check[0]:
-            #     print("\t[AI]\tAll  indicators are supported.")
-            #
-            # else:
-            #     print(f"\t[AI]\tSome indicators aren't supported `{check[1]}`.")
 
     @property
     def predict_up_or_down(self: Self) -> Callable[[Any], str]:
@@ -169,7 +160,7 @@ class PredictionApp:
         out["signal_sell"] = np.logical_and.reduce(anti_signals)
         del signals, anti_signals
 
-        def intersects(df: pd.DataFrame) -> pd.DataFrame:
+        def intersects(df: pd.DataFrame) -> pd.Series[Any]:
             """
             Check if buy signals intersect with sell signals
             :param df:
