@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 # Own modules --------------------
 from config import GeneralParameters
-from integrate_dashboard import OutputIntegration
+from output_integration import OutputIntegration
 # --------------------------------
 
 
