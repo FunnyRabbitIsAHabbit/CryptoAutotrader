@@ -160,7 +160,7 @@ class PredictionApp:
         out["signal_sell"] = np.logical_and.reduce(anti_signals)
         del signals, anti_signals
 
-        def intersects(df: pd.DataFrame) -> pd.Series[Any]:
+        def intersects(df: pd.DataFrame) -> pd.DataFrame:
             """
             Check if buy signals intersect with sell signals
             :param df:
