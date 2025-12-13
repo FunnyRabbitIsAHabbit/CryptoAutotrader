@@ -1,10 +1,10 @@
-ccxt==4.5.24
+ccxt==4.5.27
 pandas~=2.3.3
 python-dotenv~=1.2.1
 stockstats~=0.6.5
 numpy~=2.3.4
-openai~=2.9.0
-pytest~=9.0.1
+openai~=2.11.0
+pytest~=9.0.2
 plotly~=6.5.0
 dash~=3.3.0
 waitress~=3.0.2
