@@ -1,10 +1,8 @@
 #### Disclaimer:
 
-*Usage of this software in its current form will ***likely result in loss of funds***.*
-
-*For all intents and purposes, this software is to be considered an educational example.*
-
-*See [LICENSE](LICENSE) for more clarification. And do read this README carefully.*
+*Usage of this software in its current form will ***likely result in loss of funds***. 
+For all intents and purposes, this software is to be considered an educational example.
+See [LICENSE](LICENSE) for more clarification. And do read this README carefully.*
 
 # Crypto Autotrader
 
@@ -13,44 +11,41 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/FunnyRabbitIsAHabbit/CryptoAutotrader) ![MIT License](https://img.shields.io/badge/License-MIT-green.svg) ![Static Badge](https://img.shields.io/badge/Python-3.13-brightgreen?logo=python) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/FunnyRabbitIsAHabbit/CryptoAutotrader/run_test.yaml)
 ![GitHub repo size](https://img.shields.io/github/repo-size/FunnyRabbitIsAHabbit/CryptoAutotrader) ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/CAutotrader)
 
-This software is capable of fully autonomous trading on popular cryptocurrency exchanges, once set up correctly.
+This software is designed for trading autonomously on popular cryptocurrency exchanges, once set up correctly.
 
-Currently, it utilizes several naive approaches to spot trading (either [price-related crossovers](https://trendspider.com/learning-center/moving-average-crossover-strategies/) or
-LLM-powered analytics is an option); however, due to it being highly customizable, one could squeeze better results out
-of it.
+See [YOUTUBE TUTORIAL](https://www.youtube.com/watch?v=CwRKjXicPpY).
 
-This software is open source under a permissive [License](LICENSE), and it's FREE.
-
-There is a premium version of this software available via this Telegram **[link](https://t.me/premium_autotrader_bot)**.
-
-See [YOUTUBE TUTORIAL](https://www.youtube.com/watch?v=CwRKjXicPpY), where we go over the setup process and look into more details.
-
-*This is a Python 3.13 native project. Support for older Python versions is not guaranteed, but deemed probable for 3.10 and newer (perhaps, after some dependencies downgrades).*
+Premium version of this software is available via this Telegram bot **[link](https://t.me/premium_autotrader_bot)**.
 
 ## Features
 
-* **Console** only or beautiful **PlotlyDash** GUI.
+* Spot trading with (either-or):
+  - [price-related crossovers](https://trendspider.com/learning-center/moving-average-crossover-strategies/)
+  - LLM-powered analytics.
 
-* Test mode to only test the prediction API – no trades would be made (suitable for LLM APIs; Pandas – not so much)
+* Test mode to only test the prediction API – no trades would be made (only for LLM)
 
-* LLM connection is through an API (any 'openai' library supported APIs)
+* LLM with any 'openai' library supported API
 
-* This script endlessly places buy and sell orders based on predictive modeling (with calculations of price and
-  amount, see function `prepare_order` of class `TradingBot` in module [trading_bot.py](trading_bot.py)):
+* Python floating point real numbers (`float`) are used for prices & volumes.
 
-  a. Price for 'BUY' orders is `((bid + ask) / 2) x (1 - parametrized premium)`,
-
-  b. Price for 'SELL' orders is `((bid + ask) / 2) x (1 + parametrized premium)`,
-
-  c. Amount to buy is `parametrized reinvestment_rate x free quote token balance / price buy`
-
-  d. Amount to sell is `parametrized reinvestment_rate x free base token balance`
-
-* This software operates under the assumption that one can only use one's own capital
-
-* This software uses default Python floating point real numbers (`float`) for prices & volumes
+* This software operates under the assumption that one can only use one's own capital.
 
 * This software is shipped with substantial error handling. The script is designed to run indefinitely.
+
+* **Console** output or unimplemented Base Output mode (for you to define how output is handled).
+
+* Endlessly place 'BUY' and 'SELL' orders based on predictive modeling (*).
+
+  a. 'BUY' price: `((bid + ask) / 2) x (1 - parametrized premium)`
+
+  b. 'SELL' price: `((bid + ask) / 2) x (1 + parametrized premium)`
+
+  c. 'BUY' amount: `parametrized reinvestment_rate x free quote token balance / price buy`
+
+  d. 'SELL' amount: `parametrized reinvestment_rate x free base token balance`
+
+(*) see function `prepare_order` of class `TradingBot` in module [trading_bot.py](trading_bot.py)
 
 ## Environment Variables
 
@@ -139,8 +134,7 @@ Also, if `DEFAULT_PREDICTION_API=PROBABILITY_LLM`, then additional:
 
 *Steps 3 and 4 are irrelevant, if [Dockerfile](Dockerfile) is used*
 
-Running with a `-d` or `--dashboard` flag will result in forwarding program output to a local flask server of a Dash app (only supported for `run` mode).
-This dashboard option will also show a plot of transaction cost for successfully placed orders (upward transaction cost trend coincides with portfolio estimation growth, so it's useful info).
+Running with a `-b` or `--base` flag will result in forwarding program output to alternate functions (must be implemented beforehand, only supported for `run` mode).
 
 #### 1
 
@@ -151,8 +145,8 @@ Parametrization of this software is achieved via the means of environment variab
 
 #### 2
 
-Link these `.env` files in [Python module run.py](run.py) either as command line arguments, or in the `if __name__ == "__main__":` section as
-`DEFAULT_PREDICTION_ENVIRONMENT_FILENAME` and `DEFAULT_MAIN_ENVIRONMENT_FILENAME` constants. They don't *have* to be separate files, but
+Link these `.env` files in [Python module run.py](run.py) either as command line arguments, or in the `global_main` function of [run.py](/run.py) as
+`default_prediction_environment_filename` and `default_main_environment_filename` variables. They don't *have* to be separate files, but
 at least **a** filename must be supplied of a file containing the required Environment variables.
 Not specifying a `<something>.env` file would result in scanning the literal file with the path '.env' in the same
 directory as the script.
@@ -176,20 +170,20 @@ Specify either `run` or `test` command to run the script in main mode or test mo
 Optional arguments: 
 - `-p` or `--predictions` – specify `.env` file with prediction API needed info
 - `-e` or `--env` – specify `.env` file with exchange API needed info
-- `-d` or `--dashboard` – specify this argument to run in [dashboard mode](#plotlydash-normal-scale-partial-screen) on default 0.0.0.0:8050 (or change in [config.py](config.py) class DashServer)
+- `-b` or `--base` – specify this argument to run in Base Output mode (see [base_output.py](/base_output.py)).
 
 Example run
 
     python3 run.py run -e main.env -p probability_llm.env
 
-With dashboard
+With your own output implementation
   
-    python3 run.py run -e main.env -p probability_llm.env --dashboard
+    python3 run.py run -e main.env -p probability_llm.env --base
 
 
 Alternatively run from outside project directory (change `<path_to_`run.py`>` to actual path):
 
-    sudo python3 <path_to_`run.py`> run -e main.env -p probability_llm.env --dashboard
+    sudo python3 <path_to_`run.py`> run -e main.env -p probability_llm.env --base
 
 *One might be prompted to enter Administrator password*
 
@@ -243,10 +237,6 @@ If you wish to use any other cryptocurrency, use this external provider link (no
 
 For support & troubleshooting, email crypto.autotrader@outlook.com (with Subject: `[AUTOTRADER SUPPORT]`).
 
-*Any attention that I offer to the sender, I do at my own discretion; any sender would be respectful of my time.*
-
-This repository can be forked and made the needed changes with, in such cases that I don't respond.
-
 ## Feedback & Ideas
 
 For new ideas, issues can be opened, but appreciated are emails at crypto.autotrader@outlook.com (with Subject:
@@ -266,9 +256,7 @@ This software is heavily reliant on the following masterpieces of programming:
   their [LICENSE](https://github.com/jealous/stockstats/blob/master/LICENSE.txt) (to date: Jan 27, 2025)
 * [openai library](https://github.com/openai/openai-python) with
   their [LICENSE](https://github.com/openai/openai-python/blob/main/LICENSE) (to date: Feb 6, 2025)
-* [plotly library](https://github.com/plotly) with their [LICENSE](https://github.com/plotly/plotly.py/blob/main/LICENSE.txt) (to date: Mar 11, 2025)
 * [waitress library](https://pypi.org/project/waitress/) with their [LICENSE](https://github.com/Pylons/waitress/blob/main/LICENSE.txt) (to date: Mar 11, 2025)
-* [dash library](https://github.com/plotly/dash) with their [LICENSE](https://github.com/plotly/dash/blob/dev/LICENSE) (to date: Mar 11, 2025)
 
 ## Appendix
 
@@ -293,9 +281,6 @@ See my relevant affiliate links:
 ## Screenshots
 
 The software sends user-appealing info messages to the console.
-
-### Plotly/Dash (normal scale, partial screen)
-   <img src="images/web_gui_actual_scale.png" width=300 />
 
 ### Console mode
    <img src="images/1.png" width=300 />
