@@ -11,7 +11,7 @@ See [LICENSE](LICENSE) for more clarification. And do read this README carefully
 ![GitHub Repo stars](https://img.shields.io/github/stars/FunnyRabbitIsAHabbit/CryptoAutotrader) ![MIT License](https://img.shields.io/badge/License-MIT-green.svg) ![Static Badge](https://img.shields.io/badge/Python-3.13-brightgreen?logo=python) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/FunnyRabbitIsAHabbit/CryptoAutotrader/run_test.yaml)
 ![GitHub repo size](https://img.shields.io/github/repo-size/FunnyRabbitIsAHabbit/CryptoAutotrader) ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/CAutotrader)
 
-This software is designed for trading autonomously on popular cryptocurrency exchanges, once set up correctly.
+This software is designed for autonomous trading on popular cryptocurrency exchanges.
 
 See [YOUTUBE TUTORIAL](https://www.youtube.com/watch?v=CwRKjXicPpY).
 
