@@ -4,8 +4,8 @@ Test classes. Version controlled and CI/CD specific (GitHub secret required!).
 
 import pytest
 
-from config import TestData
-from predict import PredictionApp
+from ..config import TestData
+from ..predict import PredictionApp
 
 
 class TestLLM:
