@@ -32,4 +32,4 @@ jobs:
           python -m pip install --upgrade pip && pip install -r requirements.txt
       - name: Test with pytest
         run: |
-          pytest test_app_cicd.py
+          pytest tests/test_app_cicd.py
