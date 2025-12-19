@@ -41,9 +41,9 @@ Premium version of this software is available via this Telegram bot **[link](htt
 
   b. 'SELL' price: `((bid + ask) / 2) x (1 + parametrized premium)`
 
-  c. 'BUY' amount: `parametrized reinvestment_rate x free quote token balance / price buy`
+  c. 'BUY' amount: `parametrized reinvestment rate x free quote token balance / price buy`
 
-  d. 'SELL' amount: `parametrized reinvestment_rate x free base token balance`
+  d. 'SELL' amount: `parametrized reinvestment rate x free base token balance`
 
 (*) see function `prepare_order` of class `TradingBot` in module [trading_bot.py](trading_bot.py)
 
@@ -132,10 +132,6 @@ Also, if `DEFAULT_PREDICTION_API=PROBABILITY_LLM`, then additional:
 
 ## Deployment
 
-*Steps 3 and 4 are irrelevant, if [Dockerfile](Dockerfile) is used*
-
-Running with a `-b` or `--base` flag will result in forwarding program output to alternate functions (must be implemented beforehand, only supported for `run` mode).
-
 #### 1
 
 Create `.env` file/-s:
@@ -145,9 +141,9 @@ Parametrization of this software is achieved via the means of environment variab
 
 #### 2
 
-Link these `.env` files in [Python module run.py](run.py) either as command line arguments, or in the `global_main` function of [run.py](/run.py) as
-`default_prediction_environment_filename` and `default_main_environment_filename` variables. They don't *have* to be separate files, but
-at least **a** filename must be supplied of a file containing the required Environment variables.
+Link these `.env` files in [Python module run.py](run.py) as command line arguments (or in the `global_main` function of [run.py](/run.py) as
+`default_prediction_environment_filename` and `default_main_environment_filename` variables).
+They don't *have* to be separate files, but  at least **a** filename must be supplied of a file containing the required Environment variables.
 Not specifying a `<something>.env` file would result in scanning the literal file with the path '.env' in the same
 directory as the script.
 
@@ -163,9 +159,7 @@ The required packages are installed with:
 
 Run from inside project directory:
 
-Required:
-
-Specify either `run` or `test` command to run the script in main mode or test mode, respectively.
+**Required**: Specify either `run` or `test` command to run the script in main mode or test mode, respectively.
 
 Optional arguments: 
 - `-p` or `--predictions` – specify `.env` file with prediction API needed info
@@ -176,7 +170,8 @@ Example run
 
     python3 run.py run -e main.env -p probability_llm.env
 
-With your own output implementation
+With your own output implementation.
+Running with a `-b` or `--base` flag will result in forwarding program output to alternate functions (must be implemented beforehand, only supported for `run` mode).
   
     python3 run.py run -e main.env -p probability_llm.env --base
 
@@ -191,22 +186,10 @@ Alternatively run from outside project directory (change `<path_to_`run.py`>` to
 
     python3 run.py test -p probability_llm.env
 
-***Run in test mode (outside project directory)***:
-
-    sudo python3 <path_to_`run.py`> test -p probability_llm.env
-
 
 ### Windows
 
 Untested. Windows users must be smart enough to figure out the quirks.
-
-### Docker
-
-Untested! The [Dockerfile](Dockerfile) is shipped with essential commands.
-
-## License
-
-[MIT LICENSE](LICENSE)
 
 ## Authors
 
@@ -258,6 +241,10 @@ This software is heavily reliant on the following masterpieces of programming:
   their [LICENSE](https://github.com/openai/openai-python/blob/main/LICENSE) (to date: Feb 6, 2025)
 * [waitress library](https://pypi.org/project/waitress/) with their [LICENSE](https://github.com/Pylons/waitress/blob/main/LICENSE.txt) (to date: Mar 11, 2025)
 
+## License
+
+[MIT LICENSE](LICENSE)
+
 ## Appendix
 
 Currently, the usage of a lagged crossover is hardcoded as per the vision of the developer; however, altering that is very achievable:
@@ -274,7 +261,7 @@ Autotrader**.
 
 See my relevant affiliate links:
 
-* [Rent a VPS/VDS worldwide, pay in crypto!](https://my.bluevps.com/aff.php?aff=684)
+* [Rent a VPS/VDS worldwide with good tech support, pay in crypto (other payment options also accepted)!](https://my.bluevps.com/aff.php?aff=684)
 * [Crypto processing services for persons and businesses](https://account.nowpayments.io/create-account?link_id=3477503345)
 * [Get 10% Cashback Rate on commissions on Kucoin](https://www.kucoin.com/r/rf/CX87WUV4) (or use referral code `CX87WUV4`)
 
