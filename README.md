@@ -57,7 +57,7 @@ All fields must be filled with valid strings. Fields that end with '_JSON' must 
 
 ### Main variables
 
-*It is easier to create a new `main.env` as per [example](main.env.example), that has included explanations for each
+*It is easier to create a new `main.env` as per [example](examples/main.env.example), that has included explanations for each
 variable, as well*
 
 `EXCHANGE_API_KEY` – API to access cryptoexchange
@@ -97,8 +97,8 @@ their portfolio, before an order can be placed (If that isn't the case, the scri
 
 ### Predictions related variables
 
-*(easier to create a new `llm.env` or `probability.env`, or `pandas.env` as per [example 1](llm.env.example) or 
-[example 2](probability_llm.env.example), or [example 3](pandas.env.example))*
+*(easier to create a new `llm.env` or `probability.env`, or `pandas.env` as per [example 1](examples/llm.env.example) or 
+[example 2](examples/probability_llm.env.example), or [example 3](examples/pandas.env.example))*
 
 `DEFAULT_PREDICTION_API` – either `LLM` or `PROBABILITY_LLM`, or `PANDAS` is supported
 
@@ -255,7 +255,7 @@ subsequent mentions of `self.wait_for_n_signal_lags`.
 As is known, any trading system that utilizes Technical analysis techniques would be better off in markets with high
 liquidity. With regard to this, it would be wise to pick trading pairs that are high in trading volume. However, other reasons can be considered; thus making the liquidity-related suggestion moot.
 
-[This absolute unit of a Jupyter Notebook](test_xmrusdt.ipynb) is my gift to the noob Technical analysis enthusiasts.
+[This absolute unit of a Jupyter Notebook](examples/test_xmrusdt.ipynb) is my gift to the noob Technical analysis enthusiasts.
 It can help them backtest their crossover strategies AND the code happens to be very compatible with this **Crypto
 Autotrader**.
 
@@ -270,13 +270,13 @@ See my relevant affiliate links:
 The software sends user-appealing info messages to the console.
 
 ### Console mode
-   <img src="images/1.png" width=300 />
+   <img src="images/1.png" width=300  alt="screenshot"/>
 
-   <img src="images/2.png" width=300 />
+   <img src="images/2.png" width=300   alt="screenshot"/>
 
-   <img src="images/3.png" width=300 />
+   <img src="images/3.png" width=300   alt="screenshot"/>
 
-   <img src="images/4.png" width=300 />
+   <img src="images/4.png" width=300   alt="screenshot"/>
 
-   <img src="images/5.png" width=300 />
+   <img src="images/5.png" width=300   alt="screenshot"/>
 
