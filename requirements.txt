@@ -1,7 +1,7 @@
-ccxt==4.5.29
+ccxt==4.5.30
 pandas~=2.3.3
 python-dotenv~=1.2.1
 stockstats~=0.6.5
-numpy~=2.3.4
+numpy~=2.4.0
 openai~=2.14.0
 pytest~=9.0.2
