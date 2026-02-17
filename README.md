@@ -10,7 +10,8 @@
 
 <img src="images/logo-modified.png" width=100 /> © Stan
 
-![GitHub Repo stars](https://img.shields.io/github/stars/FunnyRabbitIsAHabbit/CryptoAutotrader) ![MIT License](https://img.shields.io/badge/License-MIT-green.svg) ![Static Badge](https://img.shields.io/badge/Python-3.13-brightgreen?logo=python) ![Static Badge](https://img.shields.io/badge/Python-3.14-brightgreen?logo=python) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/FunnyRabbitIsAHabbit/CryptoAutotrader/run_test.yaml)
+![GitHub Repo stars](https://img.shields.io/github/stars/FunnyRabbitIsAHabbit/CryptoAutotrader) ![MIT License](https://img.shields.io/badge/License-MIT-green.svg) ![Static Badge](https://img.shields.io/badge/Python-3.13-brightgreen?logo=python) ![Static Badge](https://img.shields.io/badge/Python-3.14-brightgreen?logo=python) ![GitHub Release](https://img.shields.io/github/v/release/funnyrabbitisahabbit/cryptoautotrader)
+ ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/FunnyRabbitIsAHabbit/CryptoAutotrader/release.yaml)
 ![GitHub repo size](https://img.shields.io/github/repo-size/FunnyRabbitIsAHabbit/CryptoAutotrader) ![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/CAutotrader)
 
 This is an architecture template repository. The software is capable of fully autonomous trading on popular cryptocurrency exchanges, once set up correctly.
