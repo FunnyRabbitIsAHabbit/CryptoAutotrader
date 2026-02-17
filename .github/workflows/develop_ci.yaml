@@ -5,6 +5,19 @@ on:
     branches:
       - develop
 
+env:
+  LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+  LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+  LLM_MODEL: ${{ vars.LLM_MODEL }}
+  LOWER_PROB: ${{ vars.LOWER_PROB }}
+  UPPER_PROB: ${{ vars.UPPER_PROB }}
+
+  DEFAULT_PREDICTION_API: ${{ vars.DEFAULT_PREDICTION_API }}
+
+  PREDICTION_GLOBAL_SIGNAL_LAG: ${{ vars.PREDICTION_GLOBAL_SIGNAL_LAG }}
+  PREDICTION_INDICATORS_JSON: ${{ vars.PREDICTION_INDICATORS_JSON }}
+  PREDICTION_OPERATIONAL_PRICE_TYPE: ${{ vars.PREDICTION_OPERATIONAL_PRICE_TYPE }}
+
 permissions:
   contents: write
   pull-requests: write
