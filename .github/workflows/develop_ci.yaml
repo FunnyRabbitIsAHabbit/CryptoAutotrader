@@ -41,6 +41,6 @@ jobs:
         if: success()
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: develop
-          base: main
+          branch: main
+          base: develop
           title: "Auto PR: develop → main"
