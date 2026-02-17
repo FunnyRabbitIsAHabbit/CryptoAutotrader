@@ -83,7 +83,7 @@ def global_main() -> None:
 
             # If -b or --base flags have been used to run the script
             if console.base:
-                print("[START]\tRunning in `run` mode with base output logic.")
+                print("[START]\tRunning in `run` mode with altered base output logic.")
                 trading_bot: TradingBot = TradingBot(
                     prediction_api=prediction_function,
                     output_integration=OutputIntegration("base"),
@@ -92,7 +92,7 @@ def global_main() -> None:
 
             # No -b or --base flag has been given
             else:
-                print("[START]\tStarted module in `run` mode without dashboard.")
+                print("[START]\tStarted module in `run` mode (console).")
                 trading_bot: TradingBot = TradingBot(
                     prediction_api=prediction_function,
                     output_integration=OutputIntegration("console"),

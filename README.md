@@ -24,13 +24,9 @@ This software is open source under a permissive [License](LICENSE), and it's FRE
 
 There is a premium version of this software available via this Telegram **[link](https://t.me/premium_autotrader_bot)**.
 
-See [YOUTUBE TUTORIAL](https://www.youtube.com/watch?v=CwRKjXicPpY), where we go over the setup process and look into more details.
-
 *This is a Python 3.13 native project. Python 3.14 has been tested to work, as well. Support for older Python versions is not guaranteed, but deemed probable for 3.10 and newer (perhaps, after some dependencies downgrades).*
 
 ## Features
-
-* **Console** only or beautiful **PlotlyDash** GUI.
 
 * Test mode to only test the prediction API – no trades would be made (suitable for LLM APIs; Pandas – not so much)
 
@@ -140,8 +136,7 @@ Also, if `DEFAULT_PREDICTION_API=PROBABILITY_LLM`, then additional:
 
 *Steps 3 and 4 are irrelevant, if Docker deployment is used*
 
-Running with a `-d` or `--dashboard` flag will result in forwarding program output to a local flask server of a Dash app (only supported for `run` mode).
-This dashboard option will also show a plot of transaction cost for successfully placed orders (upward transaction cost trend coincides with portfolio estimation growth, so it's useful info).
+Running with a `-b` or `--base` flag will result in forwarding program output to a separately defined logic ([base_output.py](base_output.py) must be implemented).
 
 #### 1
 
@@ -164,7 +159,7 @@ directory as the script.
 
 The required packages are installed with:
 
-    pip install --root-user-action=ignore --upgrade pip && pip install --root-user-action=ignore -r requirements.txt
+    pip install --upgrade pip && pip install -r requirements.txt
 
 #### 4
 
@@ -177,20 +172,20 @@ Specify either `run` or `test` command to run the script in main mode or test mo
 Optional arguments: 
 - `-p` or `--predictions` – specify `.env` file with prediction API needed info
 - `-e` or `--env` – specify `.env` file with exchange API needed info
-- `-d` or `--dashboard` – specify this argument to run in [dashboard mode](#plotlydash-normal-scale-partial-screen) on default 0.0.0.0:8050 (or change in [config.py](config.py) class DashServer)
+- `-b` or `--base` – specify this argument to run in [a different base output mode](base_output.py).
 
 Example run
 
     python3 run.py run -e main.env -p probability_llm.env
 
-With dashboard
+With altered output
   
-    python3 run.py run -e main.env -p probability_llm.env --dashboard
+    python3 run.py run -e main.env -p probability_llm.env --base
 
 
 Alternatively run from outside project directory (change `<path_to_`run.py`>` to actual path):
 
-    sudo python3 <path_to_`run.py`> run -e main.env -p probability_llm.env --dashboard
+    sudo python3 <path_to_`run.py`> run -e main.env -p probability_llm.env --base
 
 *One might be prompted to enter Administrator password*
 
@@ -205,7 +200,7 @@ Alternatively run from outside project directory (change `<path_to_`run.py`>` to
 
 ### Windows
 
-Untested. Windows users must be smart enough to figure out the quirks.
+Untested.
 
 ### Docker
 
@@ -244,13 +239,9 @@ If you wish to use any other cryptocurrency, use this external provider link (no
 
 For support & troubleshooting, email crypto.autotrader@outlook.com (with Subject: `[AUTOTRADER SUPPORT]`).
 
-*Any attention that I offer to the sender, I do at my own discretion; any sender would be respectful of my time.*
-
-This repository can be forked and made the needed changes with, in such cases that I don't respond.
-
 ## Feedback & Ideas
 
-For new ideas, issues can be opened, but appreciated are emails at crypto.autotrader@outlook.com (with Subject:
+For new ideas, issues can be opened, also one may email us at crypto.autotrader@outlook.com (with Subject:
 `[AUTOTRADER IDEAS]`)
 
 ## Acknowledgements
@@ -278,7 +269,7 @@ subsequent mentions of `self.wait_for_n_signal_lags`.
 As is known, any trading system that utilizes Technical analysis techniques would be better off in markets with high
 liquidity. With regard to this, it would be wise to pick trading pairs that are high in trading volume. However, other reasons can be considered; thus making the liquidity-related suggestion moot.
 
-[This absolute unit of a Jupyter Notebook](test_xmrusdt.ipynb) is my gift to the noob Technical analysis enthusiasts.
+[This absolute unit of a Jupyter Notebook](examples/test_xmrusdt.ipynb) is my gift to the noob Technical analysis enthusiasts.
 It can help them backtest their crossover strategies AND the code happens to be very compatible with this **Crypto
 Autotrader**.
 
