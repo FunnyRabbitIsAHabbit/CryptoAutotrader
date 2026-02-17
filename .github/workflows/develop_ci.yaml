@@ -22,7 +22,7 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - run: pytest test_app_cicd.py
+      - run: pytest tests/test_app_cicd.py
 
       - name: Create PR to main
         if: success()
