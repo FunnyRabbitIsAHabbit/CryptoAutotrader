@@ -17,8 +17,7 @@
 This is an architecture template repository. The software is capable of fully autonomous trading on popular cryptocurrency exchanges, once set up correctly.
 
 Currently, it utilizes several naive approaches to spot trading (either [price-related crossovers](https://trendspider.com/learning-center/moving-average-crossover-strategies/) or
-LLM-powered analytics is an option); however, due to it being highly customizable, one could squeeze better results out
-of it.
+LLM-powered analytics is an option); however, it is highly customizable.
 
 This software is open source under a permissive [License](LICENSE), and it's FREE.
 
@@ -28,11 +27,17 @@ There is a premium version of this software available via this Telegram **[link]
 
 ## Features
 
-* Test mode to only test the prediction API – no trades would be made (suitable for LLM APIs; Pandas – not so much)
+* Test mode to only test the prediction API – no trades would be made (absolutely suitable for LLM APIs; Pandas – debatable)
 
-* LLM connection is through an API (any 'openai' library supported APIs)
+* LLM connection is through any 'openai' library supported API
 
-* This script endlessly places buy and sell orders based on predictive modeling (with calculations of price and
+* Operating under the assumption that one can only use one's own capital
+
+* Default Python floating point real numbers (`float`) for prices & volumes
+
+* Substantial error handling & designed to run indefinitely
+
+* The trading bot script (function `main` of class `TradingBot`in module `trading_bot.py`) endlessly places buy and sell orders based on predictive modeling (with calculations of price and
   amount, see function `prepare_order` of class `TradingBot` in module [trading_bot.py](trading_bot.py)):
 
   a. Price for 'BUY' orders is `((bid + ask) / 2) x (1 - parametrized premium)`,
@@ -42,12 +47,6 @@ There is a premium version of this software available via this Telegram **[link]
   c. Amount to buy is `parametrized reinvestment_rate x free quote token balance / price buy`
 
   d. Amount to sell is `parametrized reinvestment_rate x free base token balance`
-
-* This software operates under the assumption that one can only use one's own capital
-
-* This software uses default Python floating point real numbers (`float`) for prices & volumes
-
-* This software is shipped with substantial error handling. The script is designed to run indefinitely.
 
 ## Environment Variables
 
@@ -59,7 +58,7 @@ All fields must be filled with valid strings. Fields that end with '_JSON' must 
 
 ### Main variables
 
-*It is easier to create a new `main.env` as per [example](main.env.example), that has included explanations for each
+*It is easier to create a new `main.env` as per [example](examples/main.env.example), that has included explanations for each
 variable, as well*
 
 `EXCHANGE_API_KEY` – API to access cryptoexchange
@@ -73,15 +72,15 @@ orders (*default is 0.5, can be a real value in range [0.0;1.0]*)
 
 `BASE_SLEEP_TIME` – sleep time in seconds between program cycles
 
-`CANCEL_ORDER_LIMIT` – how many cycles to wait before cancelling all open orders (cancels orders on achieving LIMIT)
+`CANCEL_ORDER_LIMIT` – how many cycles to wait before cancelling all open orders (cancels orders on achieving CANCEL_ORDER_LIMIT)
 
 `RETRIES_BEFORE_SLEEP_LIMIT` – how many times to retry without sleeping (only unknown errors)
 
 `DATA_VECTOR_LENGTH` – Number of past-data points to use in predictive modeling
 
-`DEFAULT_EXCHANGE_NAME` – ccxt supported exchange name
+`DEFAULT_EXCHANGE_NAME` – 'CCXT' supported exchange name
 
-`DEFAULT_EXCHANGE_FEE` – price fraction that is collected as order fee by crypto exchange
+`DEFAULT_EXCHANGE_FEE` – price fraction that is collected as order fee by crypto exchange (needed for calculations to support decision making)
 
 `PREMIUM_OVER_EXCHANGE_FEES` – any positive real number (would be kept at 0.0, to only account for exchange fee without
 additional premium/discount on bid/ask)
@@ -89,34 +88,34 @@ additional premium/discount on bid/ask)
 `MIN_TRANSACTION_VALUE_IN_BASE` – Minimal amount to spot-order base currency for a given trading pair
 
 `TIMEFRAME` – Depending on cryptoexchange, this value can be set as either of: `1m`, `3m`, `5m`, `10m`, `15m`, `30m`,
-`4h`, `8h`, `12h`, `1w`. See ccxt docs or exchange API for correct info.
+`4h`, `8h`, `12h`, `1w`. See CCXT docs or exchange API for correct info on a particular exchange.
 
 `TRADING_PAIR` – What to spot trade (e.g., `XMR/USDT`). NOTE: One must have both of these two tokens in any amount in
-their portfolio, before an order can be placed (If that isn't the case, the script will show a
+their portfolio present, before an order can be placed (If that isn't the case, the script will show a
 `ProbablyAIButCouldBeAnything` exception with the ticker of the token one doesn't own).
 
 `TRADING_BASE`, `TRADING_QUOTE` – if a trading pair doesn't have a `/` sign, these are necessary (i.e., if `TRADING_PAIR=XMRUSDT`, then `TRADING_BASE=XMR` and `TRADING_QUOTE=USDT` MUST be supplied)
 
 ### Predictions related variables
 
-*(easier to create a new `llm.env` or `probability.env`, or `pandas.env` as per [example 1](llm.env.example) or 
-[example 2](probability_llm.env.example), or [example 3](pandas.env.example))*
+*(easier to create a new `llm.env` or `probability.env`, or `pandas.env` as per [example 1](examples/llm.env.example) or 
+[example 2](examples/probability_llm.env.example), or [example 3](examples/pandas.env.example))*
 
 `DEFAULT_PREDICTION_API` – either `LLM` or `PROBABILITY_LLM`, or `PANDAS` is supported
 
-#### Case 1
+#### Case 1 — Pandas
 
 If `DEFAULT_PREDICTION_API=PANDAS`, then:
 
 `PREDICTION_OPERATIONAL_PRICE_TYPE` – stockstats.StockDataFrame supported indicator or price type (e.g., `middle_2_sma`
 or `close`). Numbers cannot exceed `DATA_VECTOR_LENGTH`.
 
-`PREDICTION_INDICATORS_JSON` – valid json array of stockstats.StockDataFrame supported indicators (e.g.,
+`PREDICTION_INDICATORS_JSON` – valid JSON array of stockstats.StockDataFrame supported indicators (e.g.,
 `["close_5,15_kama","middle_15_ema"]`). Numbers cannot exceed `DATA_VECTOR_LENGTH`.
 
 `PREDICTION_GLOBAL_SIGNAL_LAG` – integer value of 1 or greater (cannot exceed `DATA_VECTOR_LENGTH`).
 
-#### Case 2
+#### Case 2 — LLM
 
 If `DEFAULT_PREDICTION_API=LLM`, then:
 
@@ -124,17 +123,17 @@ If `DEFAULT_PREDICTION_API=LLM`, then:
 
 `LLM_API_KEY` – your LLM api key,
 
-`LLM_MODEL` – model to use,
+`LLM_MODEL` – model name to use.
+
+All three are further supplied to the 'openai' library calls.
 
 Also, if `DEFAULT_PREDICTION_API=PROBABILITY_LLM`, then additional:
 
-`LOWER_PROB` – Sell signal, if lower than (valid number or default 20)
+`LOWER_PROB` – Sell signal, if the probability of the prediction being correct is lower than (valid number or default 20)
 
-`UPPER_PROB` – Buy signal, if higher than (valid number or default 80).
+`UPPER_PROB` – Buy signal, if the probability of the prediction being correct is higher than (valid number or default 80).
 
 ## Deployment
-
-*Steps 3 and 4 are irrelevant, if Docker deployment is used*
 
 Running with a `-b` or `--base` flag will result in forwarding program output to a separately defined logic ([base_output.py](base_output.py) must be implemented).
 
@@ -170,8 +169,8 @@ Required:
 Specify either `run` or `test` command to run the script in main mode or test mode, respectively.
 
 Optional arguments: 
-- `-p` or `--predictions` – specify `.env` file with prediction API needed info
-- `-e` or `--env` – specify `.env` file with exchange API needed info
+- `-p` or `--predictions` with a filepath – specify `.env` file with prediction API needed info
+- `-e` or `--env` with a filepath – specify `.env` file with exchange API needed info
 - `-b` or `--base` – specify this argument to run in [a different base output mode](base_output.py).
 
 Example run
@@ -185,7 +184,7 @@ With altered output
 
 Alternatively run from outside project directory (change `<path_to_`run.py`>` to actual path):
 
-    sudo python3 <path_to_`run.py`> run -e main.env -p probability_llm.env --base
+    sudo python3 <path_to_`run.py`> run -e main.env -p probability_llm.env
 
 *One might be prompted to enter Administrator password*
 
@@ -214,16 +213,17 @@ Untested.
 
 - Stan [@FunnyRabbitIsAHabbit](https://www.github.com/funnyrabbitisahabbit)
 
-## 🚀 About Me
+## 🚀 About the Author
 
-I'm a Software Engineer, specializing in all things Python. I code a lot, I don't publish my code a lot. I
-also happen to be a domain expert in Business, Economics & Finance, holding both M.Sc. & B.Sc. degrees in relevant
+I'm a Software Engineer, specializing in all things Python. I code a lot, I don't publish my code a lot. I happen to be a domain expert in Business, Economics & Finance, holding both M.Sc. & B.Sc. degrees in relevant
 fields of study.
 
-I might be available for hire at a random time. Reach out with offers via email stevietfg+joboffer@gmail.com.
+***I am also trying to fund my PhD with the current goal at USD 30,000. Most license payments and donations will go toward that. This includes move costs, visa applications and support, rent for while I study.***
 
-If you'd like to support my endeavors (or my lifestyle, in general), in accordance with the nature and character of this
-software, I directly accept donations in one truly CRYPTO currency – [Monero (XMR)](https://www.getmonero.org) at addresses:
+I might be available for hire. Reach out with offers via email stevietfg+joboffer@gmail.com.
+
+If you'd like to support me, in accordance with the nature and character of this
+software, I prefer to directly accept donations in one truly CRYPTO currency – [Monero (XMR)](https://www.getmonero.org) at addresses:
 
 * `83woV72JcSXiPfrddb25znWiPULtkwFmZVXdPGkvNj6DArk3LUxedsG71A7ErK5cRHBTJPpjSorEz6j5sCJs1C1gCjmagaL`
 
@@ -235,13 +235,19 @@ If you wish to use any other cryptocurrency, use this external provider link (no
     <img src="https://nowpayments.io/images/embeds/donation-button-white.svg" alt="Cryptocurrency & Bitcoin donation button by NOWPayments" width="200">
 </a>
 
+If you wish to use regular payment methods, use this donation link:
+
+<a href="https://boosty.to/stantheman/donate">
+    <img src="images/stantheman-donate.png" alt="Regular donation QR code by Boosty" width="200">
+</a>
+
 ## Support
 
-For support & troubleshooting, email crypto.autotrader@outlook.com (with Subject: `[AUTOTRADER SUPPORT]`).
+For support & troubleshooting, open issues or email us crypto.autotrader@outlook.com (with Subject: `[AUTOTRADER SUPPORT]`).
 
 ## Feedback & Ideas
 
-For new ideas, issues can be opened, also one may email us at crypto.autotrader@outlook.com (with Subject:
+For new ideas, open issues or email us at crypto.autotrader@outlook.com (with Subject:
 `[AUTOTRADER IDEAS]`)
 
 ## Acknowledgements
